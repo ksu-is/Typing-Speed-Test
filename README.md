@@ -15,7 +15,6 @@
 
 Written completely in python with no external dependencies!
 
-I also would like to combine this typing speed test with a car racing game which makes the test more fun to do.
 
 ## ✨ Main Features
 
