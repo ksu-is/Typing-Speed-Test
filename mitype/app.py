@@ -451,21 +451,6 @@ class App:
             curses.color_pair(5),
         )
 
-        def render_stats(self):
-        correct_words = [
-            word
-            for word, status in zip(self._words, self._status)
-            if status == STATUS_TYPED_WELL
-        ]
-        wrong_words = [
-            word
-            for word, status in zip(self._words, self._status)
-            if status == STATUS_TYPED_WRONG
-        ]
-        correct_characters = sum(len(word) + 1 for word in correct_words)
-        wrong_characters = sum(len(word) + 1 for word in wrong_words)
-        total_characters = correct_characters + wrong_characters
-
     @staticmethod
     def get_dimensions(win):
         """Get the width of terminal.
