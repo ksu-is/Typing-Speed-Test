@@ -451,20 +451,20 @@ class App:
             curses.color_pair(5),
         )
 
-        error_count = 0
-    word_count_user = 0
-    word_count = 0
-    error_list_user = []
-
-    for i in user_input.split(" "):
-        word_count_user += 1
-        if i not in random_sentence.split(" "):
-            error_count += 1
-            error_list_user.append(i)
-    for j in random_sentence.split(" "):
-        word_count += 1
-
-    correct_entries = word_count_user - error_count
+        def render_stats(self):
+        correct_words = [
+            word
+            for word, status in zip(self._words, self._status)
+            if status == STATUS_TYPED_WELL
+        ]
+        wrong_words = [
+            word
+            for word, status in zip(self._words, self._status)
+            if status == STATUS_TYPED_WRONG
+        ]
+        correct_characters = sum(len(word) + 1 for word in correct_words)
+        wrong_characters = sum(len(word) + 1 for word in wrong_words)
+        total_characters = correct_characters + wrong_characters
 
     @staticmethod
     def get_dimensions(win):
