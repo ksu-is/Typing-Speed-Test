@@ -5,6 +5,7 @@ import os
 import sys
 import time
 
+
 import mitype.signals
 from mitype.calculations import (
     accuracy,
@@ -26,7 +27,6 @@ from mitype.keycheck import (
     is_valid_initial_key,
 )
 from mitype.timer import get_elapsed_minutes_since_first_keypress
-
 
 class App:
     """Class for enclosing all methods required to run Mitype."""
@@ -59,7 +59,7 @@ class App:
         self.window_width = 0
         self.line_count = 0
 
-        self.current_word_limit = 25
+        self.current_word_limit = 50
 
         self.test_complete = False
 
@@ -69,6 +69,10 @@ class App:
 
         self.total_chars_typed = 0
         self.text_without_spaces = self.original_text_formatted.replace(" ", "")
+
+        pygame.init()
+        self.open_img = pygame.image.load('icon.jpg')
+        self.open_img = pygame.transform.scale(self.open_img, (self.w,self.h))
 
         sys.stdout = sys.__stdout__
 
@@ -259,6 +263,8 @@ class App:
             self.current_word += " "
             self.current_string += " "
 
+
+
     def appendkey(self, key):
         """Append a character to the end of the current word.
 
@@ -444,6 +450,21 @@ class App:
             " Accuracy: " + "{:.2f}".format(self.accuracy) + "% ",
             curses.color_pair(5),
         )
+
+        error_count = 0
+    word_count_user = 0
+    word_count = 0
+    error_list_user = []
+
+    for i in user_input.split(" "):
+        word_count_user += 1
+        if i not in random_sentence.split(" "):
+            error_count += 1
+            error_list_user.append(i)
+    for j in random_sentence.split(" "):
+        word_count += 1
+
+    correct_entries = word_count_user - error_count
 
     @staticmethod
     def get_dimensions(win):
