@@ -465,6 +465,8 @@ class App:
 
         return dimension_tuple
 
+print("Thank you for taking the test")
+
     @staticmethod
     def keyinput(win):
         """Retrieve next character of text input.
